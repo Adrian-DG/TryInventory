@@ -1,0 +1,13 @@
+.vscode
+Migrations
+API.pdb
+API/obj
+API/bin
+API/TryInventory.db
+
+node_modules
+e2e
+
+
+
+
