@@ -7,10 +7,13 @@ namespace API.Models
     public class AppUser : IUserData
     {
         [Key]
-        public Guid UserId { get; set; }        
+        public Guid UserId { get; set; }      
+        [Required]  
+        public string  Role { get; set; }
+        [Required]
         public byte[] PasswordHash { get; set; }
+        [Required]
         public byte[] PasswordSalt { get; set; }
-        public Company Company { get; set; }
       
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using API.Interfaces;
 using API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -43,6 +44,7 @@ namespace API.Controllers
             }
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost("create")]
         public async Task<ActionResult> Create(Brand model)
         {
@@ -57,6 +59,7 @@ namespace API.Controllers
             }
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPut("edit/{id}")]
         public async Task<ActionResult> Update(Brand model)
         {
@@ -71,6 +74,7 @@ namespace API.Controllers
             }
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("remove/{id}")]
         public async Task<ActionResult> Delete(int id)
         {

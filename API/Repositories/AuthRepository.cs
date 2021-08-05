@@ -53,7 +53,8 @@ namespace API.Repositories
                 EmailAddress = model.EmailAddress,
                 Gender = model.Gender,
                 PasswordHash = passwordHash,
-                PasswordSalt = passwordSalt
+                PasswordSalt = passwordSalt,
+                Role = Roles.User
             };
 
             await _context.AppUsers.AddAsync(user);
@@ -72,7 +73,8 @@ namespace API.Repositories
             List<Claim> claims = new List<Claim>
             {
               new Claim(ClaimTypes.NameIdentifier, model.UserId.ToString()),
-              new Claim(ClaimTypes.Name, model.Username)
+              new Claim(ClaimTypes.Name, model.Username),
+              new Claim(ClaimTypes.Role, model.Role)
             };
         
             var SecretKey = _configuration.GetSection("SecretKey").Value;

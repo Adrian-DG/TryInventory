@@ -45,6 +45,7 @@ namespace API.Controllers
             }
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPost("create")]
         public async Task<ActionResult> Create(Supplier model)
         {
@@ -59,6 +60,7 @@ namespace API.Controllers
             }
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpPut("edit/{id}")]
         public async Task<ActionResult> Update(Supplier model)
         {
@@ -73,6 +75,7 @@ namespace API.Controllers
             }
         }
 
+        [Authorize(Roles = Roles.Admin)]
         [HttpDelete("remove/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
