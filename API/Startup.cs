@@ -31,6 +31,7 @@ namespace API
             services.GetApplicationServices(Configuration);
             services.GetDbServices(Configuration, currentEnvironment);     
             services.GetAuthServices(Configuration);
+            services.AddCors(opt => opt.AddPolicy("AllwedOrigins", builder => builder.WithOrigins("http://localhost:4200")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -52,6 +53,7 @@ namespace API
 
             app.UseRouting();
             app.UseAuthentication();
+            app.UseCors();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
