@@ -1,0 +1,23 @@
+@import '../../../styles.scss';
+
+.navbar {
+	background-color: $primary-color;
+	.nav-item {
+		margin: 0 0.5em;
+	}
+	.navbar-brand,
+	.nav-link {
+		font-weight: bold;
+		color: $font-secondary-color;
+	}
+	.form-inline {
+		.form-control {
+			margin: 0 0.5em;
+			font-weight: 500;
+		}
+		.btn {
+			margin-left: 1em;
+			font-weight: 600;
+		}
+	}
+}
