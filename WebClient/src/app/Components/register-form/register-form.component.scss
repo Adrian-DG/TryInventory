@@ -1,0 +1,18 @@
+@import '../../../styles.scss';
+
+.card-body {
+	.form-label,
+	.form-check-label {
+		@extend %primary-font;
+	}
+	.form-control {
+		color: $font-primary-color;
+	}
+	.form-row {
+		margin: 0.5em auto;
+		.col-md-6,
+		.col-md-12 {
+			margin: 0.2em auto;
+		}
+	}
+}
