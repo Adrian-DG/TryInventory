@@ -3,6 +3,8 @@
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+$small-font-size: 500;
+
 $primary-color: #665b99;
 $primary-lighten: #8278af;
 
@@ -16,3 +18,8 @@ $font-secondary-color: #fff;
 /* button's */
 $btn-success-color: #56e449;
 $btn-danger-color: #dd6b6b;
+
+%primary-font {
+	color: $font-primary-color;
+	font-weight: $small-font-size;
+}
