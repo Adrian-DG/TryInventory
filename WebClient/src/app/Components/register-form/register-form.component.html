@@ -1,88 +1,151 @@
-<div class="card-body">
-	<form>
-		<div class="form-row">
-			<div class="col-md-6">
-				<label class="form-label" for="">Firstname</label
-				><input
-					type="text"
-					placeholder="firstname"
-					class="form-control"
-				/>
-			</div>
-			<div class="col-md-6">
-				<label class="form-label" for="">Lastname</label
-				><input
-					type="text"
-					placeholder="lastname"
-					class="form-control"
-				/>
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="col-md-6">
-				<label class="form-label" for="">Birthday</label>
-				<input type="date" class="form-control" />
-			</div>
-			<div class="col-md-6">
-				<label class="form-label" for="">Select Gender</label>
-				<div class="row">
-					<div class="col-md-4">
-						<div class="form-check form-check-inline">
-							<input
-								class="form-check-input"
-								type="radio"
-								value="M"
-							/>
-							<label class="form-check-label" for="inlineRadio1"
-								>Male</label
-							>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-check form-check-inline">
-							<input
-								class="form-check-input"
-								type="radio"
-								value="f"
-							/>
-							<label class="form-check-label" for="inlineRadio1"
-								>Female</label
-							>
-						</div>
-					</div>
-					<div class="col-md-4"></div>
+<div class="card">
+	<div class="card-header">
+		<h2 class="text-center">Registration Form</h2>
+		<p class="text-muted text-center">
+			Start using TryInventory and make your life a lot more easier, we
+			give you the oportunity to try it for free.
+		</p>
+	</div>
+
+	<div class="card-body">
+		<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+			<div class="form-row">
+				<div class="col-md-6">
+					<label class="form-label" for="">Firstname</label
+					><input
+						type="text"
+						placeholder="firstname"
+						class="form-control"
+						formControlName="firstname"
+					/>
+				</div>
+				<div class="col-md-6">
+					<label class="form-label" for="">Lastname</label
+					><input
+						type="text"
+						placeholder="lastname"
+						class="form-control"
+						formControlName="lastname"
+					/>
 				</div>
 			</div>
-		</div>
-		<div class="form-row">
-			<div class="col-md-12">
-				<label for="" class="form-label">Phone number</label
-				><input
-					type="tel"
-					placeholder="000-000-0000"
-					class="form-control"
-				/>
+			<div class="form-row">
+				<div class="col-md-6">
+					<label class="form-label" for="">Birthday</label>
+					<input
+						type="date"
+						class="form-control"
+						formControlName="doB"
+					/>
+				</div>
+				<div class="col-md-6">
+					<label class="form-label" for="">Select Gender</label>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-check form-check-inline">
+								<input
+									class="form-check-input"
+									type="radio"
+									value="M"
+									formControlName="gender"
+								/>
+								<label
+									class="form-check-label"
+									for="inlineRadio1"
+									>Male</label
+								>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-check form-check-inline">
+								<input
+									class="form-check-input"
+									type="radio"
+									value="f"
+									formControlName="gender"
+								/>
+								<label
+									class="form-check-label"
+									for="inlineRadio1"
+									>Female</label
+								>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-12">
+					<label for="" class="form-label">Phone number</label
+					><input
+						type="tel"
+						placeholder="000-000-0000"
+						class="form-control"
+						formControlName="phoneNumber"
+					/>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-12">
+					<label for="" class="form-label">Email Address</label
+					><input
+						type="email"
+						placeholder="example@mail.com"
+						class="form-control"
+						formControlName="emailAddress"
+					/>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-12">
+					<label for="" class="form-label">Username</label
+					><input
+						type="text"
+						placeholder="username"
+						class="form-control"
+						formControlName="username"
+					/>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-12">
+					<label for="" class="form-label">Password</label
+					><input
+						type="password"
+						placeholder="password"
+						class="form-control"
+						formControlName="password"
+					/>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<div class="card-footer">
+		<div class="row">
+			<div class="col-sm-12 col-md-6">
+				<button
+					type="button"
+					class="btn btn-block btn-outline-secondary"
+					(click)="clearForm()"
+				>
+					Reset
+				</button>
+			</div>
+			<div class="col-sm-12 col-md-6">
+				<button
+					type="submit"
+					class="btn btn-block btn-success"
+					[disabled]="!registerForm.valid"
+				>
+					Register
+				</button>
 			</div>
 		</div>
-		<div class="form-row">
-			<div class="col-md-12">
-				<label for="" class="form-label">Email Address</label
-				><input
-					type="email"
-					placeholder="example@mail.com"
-					class="form-control"
-				/>
-			</div>
-		</div>
-		<div class="form-row">
-			<div class="col-md-12">
-				<label for="" class="form-label">Password</label
-				><input
-					type="password"
-					placeholder="password"
-					class="form-control"
-				/>
-			</div>
-		</div>
-	</form>
+	</div>
 </div>
+
+Validation: {{ registerForm.status | json }}
+<br />
+Values: {{ registerForm.value | json }}

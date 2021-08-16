@@ -1,15 +1,41 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../Services/authetication/auth.service';
+import { IResponse } from 'src/app/Interfaces/IResponse';
 
 @Component({
-  selector: 'app-register-form',
-  templateUrl: './register-form.component.html',
-  styleUrls: ['./register-form.component.scss']
+	selector: 'app-register-form',
+	templateUrl: './register-form.component.html',
+	styleUrls: ['./register-form.component.scss'],
 })
 export class RegisterFormComponent implements OnInit {
+	registerForm: FormGroup;
 
-  constructor() { }
+	constructor(private $fb: FormBuilder, private _auth: AuthService) {
+		/* ----- initialize registerForm ------- */
 
-  ngOnInit(): void {
-  }
+		this.registerForm = this.$fb.group({
+			firstname: ['', [Validators.required]],
+			lastname: ['', [Validators.required]],
+			doB: [],
+			username: ['', [Validators.required]],
+			phoneNumber: ['', [Validators.required]],
+			emailAddress: ['', [Validators.required]],
+			password: ['', [Validators.required, Validators.minLength(8)]],
+			gender: [''],
+		});
+	}
 
+	onSubmit(): void {
+		console.log(this.registerForm.value);
+		// this._auth
+		// 	.Register(this.registerForm.value)
+		// 	.subscribe((resp: IResponse) => console.log(resp));
+	}
+
+	clearForm(): void {
+		this.registerForm.reset();
+	}
+
+	ngOnInit(): void {}
 }

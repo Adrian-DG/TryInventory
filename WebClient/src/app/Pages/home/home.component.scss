@@ -1,28 +1,3 @@
-@import '../../../styles.scss';
-
-@media only screen and (min-width: 768px) {
-	.card {
-		width: 30%;
-	}
-}
-
-@media only screen and (min-width: 600px) and (max-width: 650px) {
-	.card {
-		width: 40%;
-	}
-}
-
-@media only screen and (min-width: 360px) and (max-width: 600px) {
-	.card {
-		width: 90%;
-		.card-footer {
-			.col-sm-12 {
-				margin: 0.5em auto;
-			}
-		}
-	}
-}
-
 #main {
 	min-height: 90vh;
 	height: auto;
