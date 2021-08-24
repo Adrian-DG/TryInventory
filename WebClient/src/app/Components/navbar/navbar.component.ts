@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../Services/authetication/auth.service';
 
 @Component({
 	selector: 'app-navbar',
@@ -7,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
 	public isMenuCollapsed = true;
+	isUserAuthenticated: boolean = false;
 
-	constructor() {}
+	constructor(private _auth: AuthService) {}
 
-	ngOnInit(): void {}
+	checkUserStatus(): void {
+		this.isUserAuthenticated = this._auth.IsAutheticated();
+	}
+
+	ngOnInit(): void {
+		this.checkUserStatus();
+	}
 }
