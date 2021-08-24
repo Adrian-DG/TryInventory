@@ -1,0 +1,19 @@
+<form class="form-inline" (ngSubmit)="OnSubmit()">
+	<input
+		type="text"
+		name="username"
+		placeholder="username"
+		class="form-control"
+		[(ngModel)]="username"
+		required
+	/>
+	<input
+		type="password"
+		name="password"
+		placeholder="password"
+		class="form-control"
+		[(ngModel)]="password"
+		required
+	/>
+	<button type="submit" class="btn btn-success">Sign In</button>
+</form>

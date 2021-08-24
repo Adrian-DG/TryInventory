@@ -20,17 +20,21 @@ export class RegisterFormComponent implements OnInit {
 			doB: [],
 			username: ['', [Validators.required]],
 			phoneNumber: ['', [Validators.required]],
-			emailAddress: ['', [Validators.required]],
+			emailAddress: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(8)]],
 			gender: [''],
 		});
 	}
 
+	get form() {
+		return this.registerForm.controls;
+	}
+
 	onSubmit(): void {
-		console.log(this.registerForm.value);
-		// this._auth
-		// 	.Register(this.registerForm.value)
-		// 	.subscribe((resp: IResponse) => console.log(resp));
+		// console.log(this.registerForm.value);
+		this._auth
+			.Register(this.registerForm.value)
+			.subscribe((resp: IResponse) => console.log(resp));
 	}
 
 	clearForm(): void {

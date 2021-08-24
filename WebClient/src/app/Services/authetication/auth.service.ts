@@ -22,4 +22,8 @@ export class AuthService {
 	Login(model: ILogin): Observable<IResponse> {
 		return this.$http.post<IResponse>(`${this.endPoint}/login`, model);
 	}
+
+	LogOut(): void {
+		// TODO: implement LogOut method
+	}
 }

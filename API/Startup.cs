@@ -23,6 +23,7 @@ namespace API
             Configuration = configuration;
         }
 
+        public string CustomPolicy = "customPolicy";
         public IConfiguration Configuration { get; }
         public IHostEnvironment currentEnvironment; 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -31,7 +32,11 @@ namespace API
             services.GetApplicationServices(Configuration);
             services.GetDbServices(Configuration, currentEnvironment);     
             services.GetAuthServices(Configuration);
-            services.AddCors(opt => opt.AddPolicy("AllwedOrigins", builder => builder.WithOrigins("http://localhost:4200")));
+            services.AddCors(opt => opt.AddPolicy(CustomPolicy, builder => {
+                builder.WithOrigins("http://localhost:4200")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -53,7 +58,7 @@ namespace API
 
             app.UseRouting();
             app.UseAuthentication();
-            app.UseCors();
+            app.UseCors(CustomPolicy);
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

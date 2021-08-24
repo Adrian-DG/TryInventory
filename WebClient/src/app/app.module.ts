@@ -9,6 +9,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 /* --- components ------*/
 
@@ -16,6 +17,7 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { RegisterFormComponent } from './Components/register-form/register-form.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { LoginFormComponent } from './Components/login-form/login-form.component';
 
 @NgModule({
 	declarations: [
@@ -24,6 +26,7 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 		HomeComponent,
 		RegisterFormComponent,
 		DashboardComponent,
+		LoginFormComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -31,6 +34,7 @@ import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 		NgbModule,
 		HttpClientModule,
 		ReactiveFormsModule,
+		FormsModule,
 	],
 	providers: [],
 	bootstrap: [AppComponent],
