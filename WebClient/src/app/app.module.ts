@@ -7,7 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 /* ----- modules ---------- */
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -18,6 +18,8 @@ import { HomeComponent } from './Pages/home/home.component';
 import { RegisterFormComponent } from './Components/register-form/register-form.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
 import { LoginFormComponent } from './Components/login-form/login-form.component';
+
+import { AuthInterceptorService } from './Services/authInterceptor/auth-interceptor.service';
 
 @NgModule({
 	declarations: [
@@ -36,7 +38,13 @@ import { LoginFormComponent } from './Components/login-form/login-form.component
 		ReactiveFormsModule,
 		FormsModule,
 	],
-	providers: [],
+	providers: [
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptorService,
+			multi: true,
+		},
+	],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}
