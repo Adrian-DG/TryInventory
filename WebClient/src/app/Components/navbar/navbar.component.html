@@ -28,7 +28,32 @@
 				<app-login-form></app-login-form>
 			</li>
 
-			<!-- TODO: add more links -->
+			<!-- dropdown -->
+			<li class="nav-item" *ngIf="isUserAuthenticated">
+				<div class="row">
+					<div class="col">
+						<div ngbDropdown class="d-inline-block">
+							<a
+								class="nav-link"
+								id="dropdownBasic1"
+								ngbDropdownToggle
+							>
+								Welcome, {{ username }}
+							</a>
+							<div
+								ngbDropdownMenu
+								class="dropdown-menu-right"
+								aria-labelledby="dropdownBasic1"
+							>
+								<button ngbDropdownItem>Action #1</button>
+								<button ngbDropdownItem (click)="LogOut()">
+									Log Out
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
 		</ul>
 	</div>
 </nav>

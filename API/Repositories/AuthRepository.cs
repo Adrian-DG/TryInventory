@@ -33,7 +33,7 @@ namespace API.Repositories
             var user = await _context.AppUsers.SingleOrDefaultAsync(x => x.Username == model.Username);            
 
             return  VerifyPasswordHash(model.Password, user.PasswordHash, user.PasswordSalt)
-                    ? new ServerResponse { Id = user.UserId.ToString(), Message = CreateToken(user), Status = true }
+                    ? new ServerResponse { Id = user.Username, Message = CreateToken(user), Status = true }
                     : new ServerResponse { Message = "User signin failed", Status = false };
         }
 

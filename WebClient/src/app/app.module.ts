@@ -10,6 +10,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from './shared/shared.module';
 
 /* --- components ------*/
 
@@ -37,6 +38,7 @@ import { AuthInterceptorService } from './Services/authInterceptor/auth-intercep
 		HttpClientModule,
 		ReactiveFormsModule,
 		FormsModule,
+		SharedModule,
 	],
 	providers: [
 		{

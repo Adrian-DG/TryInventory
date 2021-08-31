@@ -16,6 +16,12 @@ export class LoginFormComponent implements OnInit {
 
 	OnSubmit(): void {
 		this._auth.Login({ username: this.username, password: this.password });
+		this.ClearForm();
+	}
+
+	ClearForm(): void {
+		this.username = '';
+		this.password = '';
 	}
 
 	ngOnInit(): void {}

@@ -32,9 +32,7 @@ export class RegisterFormComponent implements OnInit {
 
 	onSubmit(): void {
 		// console.log(this.registerForm.value);
-		this._auth
-			.Register(this.registerForm.value)
-			.subscribe((resp: IResponse) => console.log(resp));
+		this._auth.Register(this.registerForm.value);
 	}
 
 	clearForm(): void {
