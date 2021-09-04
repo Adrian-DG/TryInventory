@@ -9,11 +9,9 @@ export class AuthenticationGuard implements CanActivate {
 	constructor(private _auth: AuthService) {}
 
 	canActivate(): boolean {
-		if (!this._auth.IsAutheticated()) {
-			this._auth.GoBack();
-			return false;
-		}
-
-		return true;
+		let isAuthenticated = false;		
+		this._auth.isAuthenticated$
+		.subscribe(resp => isAuthenticated = resp);
+		return isAuthenticated;
 	}
 }

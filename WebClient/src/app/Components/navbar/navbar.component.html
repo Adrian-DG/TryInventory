@@ -24,21 +24,22 @@
 			</li>
 
 			<!-- Siign Formulary -->
-			<li class="nav-item" *ngIf="!isUserAuthenticated">
+			<li class="nav-item" *ngIf="!(isUserAuthenticated$ | async)">
 				<app-login-form></app-login-form>
 			</li>
 
 			<!-- dropdown -->
-			<li class="nav-item" *ngIf="isUserAuthenticated">
+			<li class="nav-item" *ngIf="isUserAuthenticated$ | async">
 				<div class="row">
 					<div class="col">
 						<div ngbDropdown class="d-inline-block">
 							<a
 								class="nav-link"
 								id="dropdownBasic1"
+								*ngIf="currentUser$ | async as user"
 								ngbDropdownToggle
 							>
-								Welcome, {{ username }}
+								Welcome, {{  user.username }}
 							</a>
 							<div
 								ngbDropdownMenu
