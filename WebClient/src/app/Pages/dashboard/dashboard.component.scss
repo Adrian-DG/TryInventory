@@ -1,12 +1,26 @@
 #dashboard-container {
-    min-height: 90vh;
+    min-height: 100vh;
     height: auto;
+    margin-top: -1em;
+
     #aside {
         width: 15%;
+        background-color: #665B99;
+        opacity: 0.85;
+        padding: 3em .5em;
+        a.nav-link {
+            color: #E3E3E3;
+            font-weight: 600;
+        }
+        a.active {
+            color: #737272;
+            background-color: #E3E3E3;;
+        }
     }
-    
+
     #outlet {
         width: 85%;
+        padding: 2em 1em;
     }
 } 
 
