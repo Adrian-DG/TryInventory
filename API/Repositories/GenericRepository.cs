@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 using API.Interfaces;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
+using API.DTO;
+using System.Linq;
 
 namespace API.Repositories
 {
@@ -22,11 +24,15 @@ namespace API.Repositories
             _dbSet.Remove(entity);
         }
 
-        public async Task<ICollection<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll(QueryParams parameters)
         {
-            return await _dbSet.ToListAsync();
+            return (IEnumerable<T>) await _dbSet
+                    .Skip((parameters.PageNumber - 1) * parameters.PageSize)
+                    .Take(parameters.PageSize)
+                    .ToListAsync();
+
         }
-        
+
         public async Task<T> GetById(object id)
         {
             return await _dbSet.FindAsync(id);
@@ -42,5 +48,7 @@ namespace API.Repositories
             _context.Attach(model);
             _context.Entry(model).State = EntityState.Modified;
         }
+
+        
     }
 }
