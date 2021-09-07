@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using API.DTO;
 
 namespace API.Controllers
 {
@@ -20,12 +21,12 @@ namespace API.Controllers
             _repo = _uof.Repository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetAll()
+       [HttpGet]
+        public async Task<ActionResult> GetAll([FromQuery] QueryParams parameters)
         {
             try 
             {
-                return  new JsonResult(await _repo.GetAll());
+                return  new JsonResult(await _repo.GetAll(parameters));
             }
             catch(Exception ex)
             {

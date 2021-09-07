@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using API.Data;
+using API.DTO;
 using API.Interfaces;
 using API.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -20,11 +21,11 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult> GetAll([FromQuery] QueryParams parameters)
         {
             try 
             {
-                return  new JsonResult(await _repo.GetAll());
+                return  new JsonResult(await _repo.GetAll(parameters));
             }
             catch(Exception ex)
             {
