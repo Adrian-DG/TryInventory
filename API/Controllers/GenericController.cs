@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using API.Data;
 using API.Interfaces;
 using API.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -8,12 +7,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class SuppliersController : BaseController
-    {
-        private IUnitOfWork<Supplier> _uof;
-        private IGenericRepository<Supplier> _repo;
+    [Authorize]
+    [ApiController]
+    [Route("api/[controller]")]
 
-        public SuppliersController(IUnitOfWork<Supplier> unitOfWork)
+    public class GenericController<T> : ControllerBase where T : class
+    {
+        private IUnitOfWork<T> _uof;
+        private IGenericRepository<T> _repo;
+        public GenericController(IUnitOfWork<T> unitOfWork)
         {
             _uof = unitOfWork;
             _repo = _uof.Repository;
@@ -47,7 +49,7 @@ namespace API.Controllers
 
         [Authorize(Roles = Roles.Admin)]
         [HttpPost("create")]
-        public async Task<ActionResult> Create(Supplier model)
+        public async Task<ActionResult> Create(T model)
         {
             try 
             {
@@ -62,7 +64,7 @@ namespace API.Controllers
 
         [Authorize(Roles = Roles.Admin)]
         [HttpPut("edit/{id}")]
-        public async Task<ActionResult> Update(Supplier model)
+        public async Task<ActionResult> Update(T model)
         {
             try 
             {
@@ -79,7 +81,7 @@ namespace API.Controllers
         [HttpDelete("remove/{id}")]
         public async Task<ActionResult> Delete(int id)
         {
-             try 
+            try 
             {
                 await _repo.Delete(id);
                 return new JsonResult(await _uof.CommitChanges());
@@ -89,5 +91,6 @@ namespace API.Controllers
                 return new JsonResult(ex.Message);
             }
         }
+
     }
 }
