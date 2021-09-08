@@ -26,18 +26,18 @@ namespace API.Repositories
             _configuration = configuration;
         }
 
-        public async Task<object> Login(LoginDTO model)
+        public async Task<LoginResponse> Login(LoginDTO model)
         {
-            if(! (await UserExist(model.Username))) return new ServerResponse { Message="Username is not valid", Status= false };
+            if(! (await UserExist(model.Username))) return new LoginResponse { Status= false };
 
             var user = await _context.AppUsers.SingleOrDefaultAsync(x => x.Username == model.Username);            
 
             return  VerifyPasswordHash(model.Password, user.PasswordHash, user.PasswordSalt)
-                    ? new ServerResponse { Id = user.Username, Message = CreateToken(user), Status = true }
-                    : new ServerResponse { Message = "User signin failed", Status = false };
+                    ? new LoginResponse { UserId = user.UserId.ToString(), Username = user.Username, Token = CreateToken(user), Status = true }
+                    : new LoginResponse { Status = false };
         }
 
-        public async Task<object> Register(RegisterDTO model)
+        public async Task<ServerResponse> Register(RegisterDTO model)
         {
             if(await UserExist(model.Username)) return new ServerResponse { Message = "That username already exist", Status = false };
 

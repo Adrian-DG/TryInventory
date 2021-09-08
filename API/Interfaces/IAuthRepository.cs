@@ -6,8 +6,8 @@ namespace API.Interfaces
 {
     public interface IAuthRepository
     {
-        Task<object> Register(RegisterDTO model);
-        Task<object> Login(LoginDTO model);
+        Task<ServerResponse> Register(RegisterDTO model);
+        Task<LoginResponse> Login(LoginDTO model);
         Task<bool> UserExist(string username);
     }
 }

@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable, ReplaySubject, Subject } from 'rxjs';
 import { ILogin } from 'src/app/Interfaces/ILogin';
 import { ToastrService } from '../Toastr/toastr.service';
 import { IUser } from 'src/app/Interfaces/iuser';
+import { ILoginResponse } from 'src/app/Interfaces/ilogin-response';
 
 @Injectable({
 	providedIn: 'root',
@@ -33,10 +34,11 @@ export class AuthService {
 	}
 
 	private GiveAccess(model: IUser): void {
+		sessionStorage.setItem('userId', model.userId);
 		sessionStorage.setItem('username', model.username);
 		sessionStorage.setItem('token', model.token);
 		this.isAuthenticatedSource.next(true);
-		this.currentUserSource.next({ username: model.username, token: model.token });
+		this.currentUserSource.next({ userId: model.userId, username: model.username, token: model.token });
 		this.$router.navigate(['dashboard', model.username]);
 		this.FormatMessage({ id: '', message: 'login proccess was successful', status: true });
 	}
@@ -53,10 +55,9 @@ export class AuthService {
 	}
 
 	GetCurrentUser(): void {
-		const username = sessionStorage.getItem("username");
-		const token = sessionStorage.getItem("token"); 
+		const { userId, username, token } = sessionStorage;		
 		(username != null && token != null)
-		? this.currentUserSource.next({ username, token })
+		? this.currentUserSource.next({ userId ,username, token })
 		: this.currentUserSource.next();
 	}
 
@@ -66,10 +67,10 @@ export class AuthService {
 	}
 
 	Login(model: ILogin): void {
-		this.$http.post<IResponse>(`${this.endPoint}/login`, model)
-		.subscribe((resp: IResponse) => {
+		this.$http.post<ILoginResponse>(`${this.endPoint}/login`, model)
+		.subscribe((resp: ILoginResponse) => {
 			resp.status 
-			? this.GiveAccess({ username: resp.id, token: resp.message }) 
+			? this.GiveAccess({ userId: resp.userId, username: resp.username, token: resp.token }) 
 			: this.FormatMessage({ id: '', message: 'login proccess failed, check credentials', status: false });
 		});
 	}
