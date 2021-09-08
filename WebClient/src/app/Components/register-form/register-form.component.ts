@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../Services/authetication/auth.service';
 import { IResponse } from 'src/app/Interfaces/IResponse';
+import { Gender } from '../../Enums/gender.enum';
 
 @Component({
 	selector: 'app-register-form',
@@ -10,6 +11,7 @@ import { IResponse } from 'src/app/Interfaces/IResponse';
 })
 export class RegisterFormComponent implements OnInit {
 	registerForm: FormGroup;
+	genders = Gender;
 
 	constructor(private $fb: FormBuilder, private _auth: AuthService) {
 		/* ----- initialize registerForm ------- */
@@ -22,7 +24,7 @@ export class RegisterFormComponent implements OnInit {
 			phoneNumber: ['', [Validators.required]],
 			emailAddress: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(8)]],
-			gender: [''],
+			gender: 0,
 		});
 	}
 
@@ -33,6 +35,7 @@ export class RegisterFormComponent implements OnInit {
 	onSubmit(): void {
 		// console.log(this.registerForm.value);
 		this._auth.Register(this.registerForm.value);
+		this.clearForm();
 	}
 
 	clearForm(): void {

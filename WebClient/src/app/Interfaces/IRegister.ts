@@ -1,3 +1,4 @@
+import { Gender } from '../Enums/gender.enum';
 export interface IRegister {
 	firstname: string;
 	lastname: string;
@@ -5,6 +6,6 @@ export interface IRegister {
 	emailAddress: string;
 	doB: Date;
 	phoneNumber: string;
-	gender: string;
+	gender: Gender;
 	password: string;
 }
