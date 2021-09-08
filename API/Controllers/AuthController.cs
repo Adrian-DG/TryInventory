@@ -9,7 +9,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController
+    public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _authRepo;
         public AuthController(IAuthRepository authRepository)
