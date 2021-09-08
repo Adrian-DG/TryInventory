@@ -63,7 +63,7 @@ namespace API.Controllers
         }
 
         [Authorize(Roles = Roles.Admin)]
-        [HttpPut("edit/{id}")]
+        [HttpPut("edit")]
         public async Task<ActionResult> Update(T model)
         {
             try 
