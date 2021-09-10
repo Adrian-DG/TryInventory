@@ -22,6 +22,10 @@ namespace API.Abstraction
         [StringLength(10)]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
-        public Gender Gender { get; set; }     
+        public Gender Gender { get; set; }
+        [DataType(DataType.Date)]     
+        public DateTime Created { get; set; }
+        [DataType(DataType.Date)]     
+        public DateTime Modified { get; set; }
     }
 }

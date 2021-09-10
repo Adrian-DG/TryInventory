@@ -4,6 +4,7 @@ using API.DTO;
 using API.Data;
 using API.Interfaces;
 using API.Models;
+using API.Abstraction;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -39,7 +40,7 @@ namespace API.Repositories
 
         public async Task<RegisterResponse> Register(RegisterDTO model)
         {
-            if(await UserExist(model.Username)) return new RegisterResponse { User = null, Status = false };
+            if(await UserExist(model.Username)) return new RegisterResponse { Message = "User already exist.", User = null, Status = false };
 
             CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
@@ -54,8 +55,8 @@ namespace API.Repositories
 
             var entity = (await _context.AppUsers.AddAsync(user)).Entity;
             return  await _context.SaveChangesAsync() > 0 
-                    ? new RegisterResponse { User = entity, Status = true }   
-                    : new RegisterResponse { User = null, Status = false };                    
+                    ? new RegisterResponse { Message = "Registration process succed.", User = entity, Status = true }   
+                    : new RegisterResponse { Message = "Something went with registration process.", User = null, Status = false };                    
         }
 
         public async Task<bool> UserExist(string username)
@@ -69,7 +70,7 @@ namespace API.Repositories
             {
               new Claim(ClaimTypes.NameIdentifier, model.UserId.ToString()),
               new Claim(ClaimTypes.Name, model.Username),
-              new Claim(ClaimTypes.Role, model.Role)
+              new Claim(ClaimTypes.Role, model.Role.Equals(1) ? "Admin" : "User") // pass the role as string
             };
         
             var SecretKey = _configuration.GetSection("SecretKey").Value;

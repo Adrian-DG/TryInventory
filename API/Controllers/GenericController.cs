@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using API.Interfaces;
-using API.Models;
+using API.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +15,7 @@ namespace API.Controllers
     {
         private IUnitOfWork<T> _uof;
         private IGenericRepository<T> _repo;
+        private const string AdminLevel = "Admin";
         public GenericController(IUnitOfWork<T> unitOfWork)
         {
             _uof = unitOfWork;
@@ -47,7 +48,7 @@ namespace API.Controllers
             }
         }
 
-        [Authorize(Roles = Roles.Admin)]
+        [Authorize(Roles = AdminLevel)]
         [HttpPost("create")]
         public async Task<ActionResult> Create(T model)
         {
@@ -62,7 +63,7 @@ namespace API.Controllers
             }
         }
 
-        [Authorize(Roles = Roles.Admin)]
+        [Authorize(Roles = AdminLevel)]
         [HttpPut("edit")]
         public async Task<ActionResult> Update(T model)
         {
@@ -77,7 +78,7 @@ namespace API.Controllers
             }
         }
 
-        [Authorize(Roles = Roles.Admin)]
+        [Authorize(Roles = AdminLevel)]
         [HttpDelete("remove/{id}")]
         public async Task<ActionResult> Delete(int id)
         {

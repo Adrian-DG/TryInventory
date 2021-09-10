@@ -25,9 +25,6 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult> Register(RegisterDTO model)
         {
-            string message = "succeed.";
-            bool status = true;
-
             var result = await _authRepo.Register(model);
 
             if(result.Status) 
@@ -40,20 +37,14 @@ namespace API.Controllers
                     Gender = model.Gender,
                     PhoneNumber = model.PhoneNumber,
                     EmailAddress = model.EmailAddress,
-                    User = result.User
+                    UserId = result.User.UserId
                 };
 
                 await _uof.Repository.Insert(newEmployee);
-
-            }
-
-            if(!(await _uof.CommitChanges())) 
-            {
-                message = "failed.";
-                status = !status;
-            }
+                await _uof.CommitChanges();
+            }            
                               
-            return new JsonResult(new ServerResponse { Message = $"Registration process {message}", Status = status });
+            return new JsonResult(new ServerResponse { Message = result.Message, Status = result.Status });
 
         }
 
