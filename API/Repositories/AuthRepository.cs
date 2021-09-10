@@ -37,30 +37,25 @@ namespace API.Repositories
                     : new LoginResponse { Status = false };
         }
 
-        public async Task<ServerResponse> Register(RegisterDTO model)
+        public async Task<RegisterResponse> Register(RegisterDTO model)
         {
-            if(await UserExist(model.Username)) return new ServerResponse { Message = "That username already exist", Status = false };
+            if(await UserExist(model.Username)) return new RegisterResponse { User = null, Status = false };
 
             CreatePasswordHash(model.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
             var user = new AppUser 
             {
-                Firstname = model.Firstname,
-                Lastname = model.Lastname,
-                DoB = model.DoB,
                 Username = model.Username,
-                PhoneNumber = model.PhoneNumber,
-                EmailAddress = model.EmailAddress,
-                Gender = model.Gender,
-                PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Role = Roles.User
+                PasswordHash = passwordHash,
+                Role = model.IsAnAdmin ? Roles.Admin : Roles.User,
+                CreatedBy = model.IsAnAdmin ? null : model.CreatedBy
             };
 
-            await _context.AppUsers.AddAsync(user);
+            var entity = (await _context.AppUsers.AddAsync(user)).Entity;
             return  await _context.SaveChangesAsync() > 0 
-                    ? new ServerResponse { Message = "User registered successfully", Status = true }   
-                    : new ServerResponse { Message = "Something went wrong during registration", Status = false };                    
+                    ? new RegisterResponse { User = entity, Status = true }   
+                    : new RegisterResponse { User = null, Status = false };                    
         }
 
         public async Task<bool> UserExist(string username)

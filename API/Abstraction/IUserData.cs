@@ -14,10 +14,6 @@ namespace API.Abstraction
         [MaxLength(10)]
         public string Lastname { get; set; }
         [Required]
-        [MinLength(6)]
-        [MaxLength(8)]
-        public string Username { get; set; }
-        [Required]
         [DataType(DataType.EmailAddress)]
         public string EmailAddress { get; set; }
         [DataType(DataType.Date)]
