@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { AsyncSubject, Observable } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root',
@@ -10,12 +10,16 @@ export abstract class GenericService<T> {
 	private readonly endPoint: string =
 		environment.api_url + '/' + this.GetResourceUrl();
 
+	private listOfTypeSource = new AsyncSubject();
+	public listOfType$ = this.listOfTypeSource.asObservable();
+
 	constructor(protected $http: HttpClient) {}
 
 	abstract GetResourceUrl(): string;
 
-	GetAll(): Observable<T[]> {
-		return this.$http.get<T[]>(this.endPoint);
+	GetAll(): void {
+		this.$http.get<T[]>(this.endPoint)
+		.subscribe((data: T[]) => this.listOfTypeSource.next(data));
 	}
 
 	GetById(id: string): Observable<T> {
