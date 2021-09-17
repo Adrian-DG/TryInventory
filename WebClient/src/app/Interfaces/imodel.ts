@@ -1,8 +1,8 @@
 export interface IModel {
-	id: string;
+	id: string | null;
 	name: string;
-	created: Date;
-	modified: Date;
+	created: Date | null;
+	modified: Date | null;
 	status: boolean;
 	userId: string;
 }

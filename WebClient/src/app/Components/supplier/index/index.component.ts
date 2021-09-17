@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 			<h3 class="text-center">Suppliers</h3>
 			<hr />
 			<div class="">
-				<h5 class="text-center">formulary goes here</h5>
+				<app-supplier-form></app-supplier-form>
 			</div>
 			<div class="list">
 				<app-suppliers-table></app-suppliers-table>

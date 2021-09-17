@@ -17,7 +17,7 @@ namespace API.Abstraction
         [DataType(DataType.DateTime)]
         public DateTime Created { get; set; }
         [DataType(DataType.DateTime)]
-        public DateTime Modified { get; set; }
+        public DateTime Modified { get; set; } = DateTime.Now;
         public bool Status { get; set; }
     }
 }

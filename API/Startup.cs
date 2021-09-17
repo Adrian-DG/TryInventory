@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 using API.Services;
+using System.Text.Json.Serialization;
 
 namespace API
 {
@@ -37,7 +38,8 @@ namespace API
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-            services.AddControllers();
+            services.AddControllers()
+            .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });

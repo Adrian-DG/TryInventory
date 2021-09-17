@@ -23,6 +23,7 @@ import { LoginFormComponent } from './Components/login-form/login-form.component
 import { AuthInterceptorService } from './Services/authInterceptor/auth-interceptor.service';
 import { TableComponent } from './Components/supplier/table/table.component';
 import { IndexComponent } from './Components/supplier/index/index.component';
+import { FormComponent } from './Components/supplier/form/form.component';
 
 @NgModule({
 	declarations: [
@@ -34,6 +35,7 @@ import { IndexComponent } from './Components/supplier/index/index.component';
 		LoginFormComponent,
   TableComponent,
   IndexComponent,
+  FormComponent,
 	],
 	imports: [
 		BrowserModule,
